@@ -49,7 +49,7 @@ function downloadAPI() {
         .then(response => {
 
             if (response.status !== 200) {
-                console.log(`Fetch responded with error: ${response.status}`);
+                console.error(`Fetch responded with error: ${response.status}`);
                 console.log("response", response);
                 return;
             }
@@ -66,7 +66,7 @@ function downloadAPI() {
             }
 
         })
-        .catch(err => console.log('Fetch Error :-S', err));
+        .catch(err => console.error('Fetch Error :-S', err));
 
 }                                                                       // downloadAPI
 
