@@ -1,10 +1,9 @@
-form * {
-    display: block;
-    margin: 5px;
+* {
     font: 14px sans-serif;
 }
 
 p {
+    display: block;
     margin: 7px;
 }
 

@@ -1,28 +1,79 @@
+function onloadBody() {
 
-// const userIDInput = document.querySelector("#UserID");
-// const fileNameInput = document.querySelector("#FileName");
-const userIDInput = document.getElementById("UserID");
-const fileNameInput = document.getElementById("FileName");
+    const userNameInput = document.getElementById("UserName");
+    const fileTypeRadio = document.downloadConfig.FileType;
 
-userIDInput.addEventListener('change', (event) => {
+    [userNameInput, ...fileTypeRadio].forEach(item => {
+        item.addEventListener('loadstart', eventSetFileName);
+        item.addEventListener('change', eventSetFileName);
+    });
 
-    console.log("event", event);
+    userNameInput.value = 'ViniciusBSilva'
 
-    fileNameInput.value = `${event.target.value}.xml`;
+    const fileTypeRadioJSON = document.getElementById('FileTypeJSON');
+    fileTypeRadioJSON.checked = true;
 
-    console.log("fileNameInput.value", fileNameInput.value);
-});
+    setFileName(getUserName(), getFileExtension());
 
-function downloadAPI(userID) {
+}                                                                       // onloadBody
 
-    fetch(`https://api.github.com/users/${userID}`)
-        .then(response => console.log(response));
+function getUserName() {
+    const userNameInput = document.getElementById("UserName");
+    return userNameInput.value;
+}                                                                       // getUserName
 
-}
+function getFileExtension() {
+    return document.querySelector('input[name="FileType"]:checked').value;
+}                                                                       // getFileExtension
 
-function download(filename, text) {
+function eventSetFileName() {
+    setFileName(getUserName(), getFileExtension());
+}                                                                       // eventSetFileName
+
+function setFileName(userName, extension) {
+    const fileNameInput = document.getElementById("FileName");
+    fileNameInput.value = `${userName}.${extension}`;
+}                                                                       // setFileName
+
+function getFileName() {
+
+    const fileNameInput = document.getElementById("FileName");
+    return fileNameInput.value
+}                                                                       // getFileName
+
+function downloadAPI() {
+
+    const userName = getUserName();
+
+    fetch(`https://api.github.com/users/${userName}`)
+        .then(response => {
+
+            if (response.status !== 200) {
+                console.log(`Fetch responded with error: ${response.status}`);
+                console.log("response", response);
+                return;
+            }
+
+            switch (getFileExtension()) {
+                case "json":
+                    response.json().then(data => download(getFileName(), data));
+                    break;
+                case "xml" :
+                    break;
+
+                default:
+                    break;
+            }
+
+        })
+        .catch(err => console.log('Fetch Error :-S', err));
+
+}                                                                       // downloadAPI
+
+function download(filename, content) {
+
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(content)));
     element.setAttribute('download', filename);
 
     element.style.display = 'none';
@@ -31,5 +82,5 @@ function download(filename, text) {
     element.click();
 
     document.body.removeChild(element);
-}
+}                                                                       // download
 

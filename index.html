@@ -9,24 +9,36 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
-<body>
+<body onload="onloadBody()">
 
     <h1>Download GitHub User API XML</h1>
 
-    <form onsubmit="downloadAPI(this['UserID'].value)">
+    <form name="downloadConfig">
+
+        <p>
+            <label for="UserName">User Name</label>
+            <input id="UserName" name="UserName" type="text"></input>
+        </p>
+
+        <p>
+            <label>File Type</label>
+        <p>
+            <input type="radio" id="FileTypeJSON" name="FileType" value="json">
+            <label for="FileTypeJSON">JSON</label>
+
+            <input type="radio" id="FileTypeXML" name="FileType" value="xml">
+            <label for="FileTypeXML">XML</label>
+        </p>
+        </p>
 
         <p>
             <label for="FileName">File Name</label>
-            <input id="FileName" name="FileName" value=".xml" disabled>
+            <input id="FileName" name="FileName" disabled>
         </p>
 
-        <p>
-            <label for="UserID">User ID</label>
-            <input id="UserID" name="UserID" type="text" value=""></input>
-        </p>
 
         <p>
-            <input type="submit" value="Download">
+            <input type="button" value="Download" onclick="downloadAPI()">
         </p>
 
     </form>
