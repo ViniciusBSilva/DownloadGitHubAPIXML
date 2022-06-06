@@ -1,10 +1,8 @@
 
 // const userIDInput = document.querySelector("#UserID");
-const userIDInput = document.getElementById("UserID");
-console.log("userIDInput", userIDInput);
 // const fileNameInput = document.querySelector("#FileName");
+const userIDInput = document.getElementById("UserID");
 const fileNameInput = document.getElementById("FileName");
-console.log("fileNameInput", fileNameInput);
 
 userIDInput.addEventListener('change', (event) => {
 
@@ -12,8 +10,15 @@ userIDInput.addEventListener('change', (event) => {
 
     fileNameInput.value = `${event.target.value}.xml`;
 
-    console.log("fileNameInput.textContent", fileNameInput.textContent);
+    console.log("fileNameInput.value", fileNameInput.value);
 });
+
+function downloadAPI(userID) {
+
+    fetch(`https://api.github.com/users/${userID}`)
+        .then(response => console.log(response));
+
+}
 
 function download(filename, text) {
     var element = document.createElement('a');
