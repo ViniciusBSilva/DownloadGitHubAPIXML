@@ -11,16 +11,18 @@
 
 <body>
 
+    <header>Download GitHub User API XML</header>
+
     <form onsubmit="download(this['name'].value, this['text'].value)">
 
         <p>
             <label for="FileName">File Name</label>
-            <input id="FileName" type="text" name="name" value="test.txt">
+            <input id="FileName" name="FileName" value=".xml" disabled>
         </p>
 
         <p>
-            <label for="Text">Text</label>
-            <textarea id="Text" name="text"></textarea>
+            <label for="UserID">User ID</label>
+            <input id="UserID" name="UserID" type="text" value=""></input>
         </p>
 
         <p>

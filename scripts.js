@@ -1,3 +1,20 @@
+
+// const userIDInput = document.querySelector("#UserID");
+const userIDInput = document.getElementById("UserID");
+console.log("userIDInput", userIDInput);
+// const fileNameInput = document.querySelector("#FileName");
+const fileNameInput = document.getElementById("FileName");
+console.log("fileNameInput", fileNameInput);
+
+userIDInput.addEventListener('change', (event) => {
+
+    console.log("event", event);
+
+    fileNameInput.value = `${event.target.value}.xml`;
+
+    console.log("fileNameInput.textContent", fileNameInput.textContent);
+});
+
 function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -10,3 +27,4 @@ function download(filename, text) {
 
     document.body.removeChild(element);
 }
+
