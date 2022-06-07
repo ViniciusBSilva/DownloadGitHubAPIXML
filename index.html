@@ -11,37 +11,46 @@
 
 <body onload="onloadBody()">
 
-    <h1>Download GitHub User API XML</h1>
+    <main class="main">
 
-    <form name="downloadConfig">
+        <header class="header">
+            <h1>Download GitHub User API XML</h1>
+        </header>
 
-        <p>
-            <label for="UserName">User Name</label>
-            <input id="UserName" name="UserName" type="text"></input>
-        </p>
+        <section class="form">
+            <form name="downloadConfig">
 
-        <p>
-            <label>File Type</label>
-        <p>
-            <input type="radio" id="FileTypeJSON" name="FileType" value="json">
-            <label for="FileTypeJSON">JSON</label>
+                <div class="form-item">
+                    <label for="UserName">User Name</label>
+                    <input id="UserName" name="UserName" type="text"></input>
+                </div>
 
-            <input type="radio" id="FileTypeXML" name="FileType" value="xml">
-            <label for="FileTypeXML">XML</label>
-        </p>
-        </p>
+                <div class="form-item">
+                    <label>File Type</label>
 
-        <p>
-            <label for="FileName">File Name</label>
-            <input id="FileName" name="FileName" disabled>
-        </p>
+                    <div class="form-item">
+                        <input type="radio" id="FileTypeJSON" name="FileType" value="json">
+                        <label for="FileTypeJSON">JSON</label>
+
+                        <input type="radio" id="FileTypeXML" name="FileType" value="xml">
+                        <label for="FileTypeXML">XML</label>
+                    </div>
+                </div>
+
+                <div class="form-item">
+                    <label for="FileName">File Name</label>
+                    <input id="FileName" name="FileName" disabled>
+                </div>
 
 
-        <p>
-            <input type="button" value="Download" onclick="downloadAPI()">
-        </p>
+                <div class="form-item">
+                    <input type="button" value="Download" onclick="downloadAPI()">
+                </div>
 
-    </form>
+            </form>
+        </section>
+
+    </main>
 
     <script src="scripts.js"></script>
 

@@ -2,7 +2,12 @@
     font: 14px sans-serif;
 }
 
-p {
+main {
+    display: block;
+    align-content: center;
+}
+
+div section header {
     display: block;
     margin: 7px;
 }
