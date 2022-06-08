@@ -15,31 +15,31 @@ function onloadBody() {
 
     setFileName(getUserName(), getFileExtension());
 
-}                                                                       // onloadBody
+} // onloadBody
 
 function getUserName() {
     const userNameInput = document.getElementById("UserName");
     return userNameInput.value;
-}                                                                       // getUserName
+} // getUserName
 
 function getFileExtension() {
     return document.querySelector('input[name="FileType"]:checked').value;
-}                                                                       // getFileExtension
+} // getFileExtension
 
 function eventSetFileName() {
     setFileName(getUserName(), getFileExtension());
-}                                                                       // eventSetFileName
+} // eventSetFileName
 
 function setFileName(userName, extension) {
     const fileNameInput = document.getElementById("FileName");
     fileNameInput.value = `${userName}.${extension}`;
-}                                                                       // setFileName
+} // setFileName
 
 function getFileName() {
 
     const fileNameInput = document.getElementById("FileName");
     return fileNameInput.value
-}                                                                       // getFileName
+} // getFileName
 
 function downloadAPI() {
 
@@ -56,9 +56,10 @@ function downloadAPI() {
 
             switch (getFileExtension()) {
                 case "json":
-                    response.json().then(data => download(getFileName(), data));
+                    response.json().then(data => downloadJSON(getFileName(), data));
                     break;
-                case "xml" :
+                case "xml":
+                    response.json().then(data => downloadXML(getFileName(), data));
                     break;
 
                 default:
@@ -68,12 +69,32 @@ function downloadAPI() {
         })
         .catch(err => console.error('Fetch Error :-S', err));
 
-}                                                                       // downloadAPI
+} // downloadAPI
+
+function downloadJSON(filename, dataJSON) {
+    download(filename, JSON.stringify(dataJSON));
+}
+
+function downloadXML(filename, dataJSON) {
+    const dataXML = json2xml(dataJSON, "");
+    // const parser = new DOMParser();
+    // const XMLDocument = parser.parseFromString(
+    //     `<user>${dataXML}</user>`, "application/xml");
+    // const serializer = new XMLSerializer()
+    // const XMLDocumentString = serializer.serializeToString(XMLDocument);
+    // if (!XMLDocument.querySelector("parsererror")) {
+    //     download(filename, XMLDocumentString);
+    // } else {
+    //     console.error("Error while parsing JSON to XML");
+    // }
+    const XMLDocument = `<user>${dataXML}</user>`;
+    download(filename, XMLDocument);
+} // downloadXML
 
 function download(filename, content) {
 
     var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(content)));
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(content));
     element.setAttribute('download', filename);
 
     element.style.display = 'none';
@@ -82,5 +103,4 @@ function download(filename, content) {
     element.click();
 
     document.body.removeChild(element);
-}                                                                       // download
-
+} // download
