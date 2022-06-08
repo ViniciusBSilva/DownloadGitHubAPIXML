@@ -77,16 +77,6 @@ function downloadJSON(filename, dataJSON) {
 
 function downloadXML(filename, dataJSON) {
     const dataXML = json2xml(dataJSON, "");
-    // const parser = new DOMParser();
-    // const XMLDocument = parser.parseFromString(
-    //     `<user>${dataXML}</user>`, "application/xml");
-    // const serializer = new XMLSerializer()
-    // const XMLDocumentString = serializer.serializeToString(XMLDocument);
-    // if (!XMLDocument.querySelector("parsererror")) {
-    //     download(filename, XMLDocumentString);
-    // } else {
-    //     console.error("Error while parsing JSON to XML");
-    // }
     const XMLDocument = `<user>${dataXML}</user>`;
     download(filename, XMLDocument);
 } // downloadXML
