@@ -7,7 +7,7 @@ main {
     align-content: center;
 }
 
-div section header {
+div, section, header {
     display: block;
     margin: 7px;
 }
